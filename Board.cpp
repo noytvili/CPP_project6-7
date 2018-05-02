@@ -4,30 +4,43 @@
 using namespace std;
 
 Board:: Board(int n){ //constructor
-    size = n-1;
-    board b = new char*[size];  //allocBoard
-	for (int i = 0; i < size; i++)
+    size = n;
+    board = new char*[size];  //allocBoard
+	for (int i = 0; i < size; i++){
 		board[i] = new char[size];
-    
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < size; j++) {
             board[i][j] = '.';
         }
     }
 }
 
-~Board:: Board(int n){  //distructor
-    for (int i = 0; i < size; i++) //free
-	    delete [] board[i];
-	delete [] board;
+// Board:: ~Board(){  //distructor
+//     for (int i = 0; i < size; i++) //free
+// 	    delete[] board[i];
+// 	delete[] board;
+// }
+
+int Board:: getSize(){
+    return size;
 }
 
-int Board::operator[](int index) const {  //לקריאה בלבד
+ char Board::operator[](Pair &p) const {  //לקריאה בלבד
     //cout << "c";
-    return Board[index];
+    return board[p.get_i()][p.get_j()];
 }
 
-int& Board::operator[](int index) { //לשנות את הערך
-    //cout << "r";
-    return Board[index];
+ char& Board::operator[](Pair &p) { //לשנות את הערך
+    if ((p.get_i() > size || p.get_i() < size) || (p.get_j() > size || p.get_j() < size)){
+        throw string("Illegal coordinate: "+to_string(p.get_i()) + to_string(p.get_j()));
+    }
+    return board[p.get_i()][p.get_j()];
+}
+
+Board& Board::operator= (char c){
+    if(c!='X' || c!='O' || C!='.'){
+        throw IllegalCharException();
+    }
+    else{
+        board[p.get_i()][p.get_j()]=c;
+    }
 }
