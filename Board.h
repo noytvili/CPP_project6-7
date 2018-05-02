@@ -1,5 +1,8 @@
 #include <iostream>
-#include "Pair.h"
+#include "newChar.h"
+#include "IllegalCoordinateException.cpp"
+#include "IllegalCharException.cpp"
+
 
 using namespace std;
 
@@ -9,13 +12,15 @@ class Board{
         int size;
 
     public :
-        char **board;
+        newChar**board;
         Board(int n); //constructor
-        //~Board(); //destructor
+       // ~Board(); //destructor
         int getSize();
-         char operator[](Pair &p) const;
-         char& operator[](Pair &p);
-          Board& operator= (Pair &p,char c);
+         newChar operator[](const Pair &p) const;
+         newChar& operator[](const Pair &p);
+         Board& operator= (char c);
+         Board& operator=(const Board& b1);
+
     
     //----------------------------------
     // friend global IO operators
