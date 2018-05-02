@@ -7,13 +7,8 @@ class Pair{
         int j;
         
     public:
-       // pair();
         Pair(int x, int y);
         int get_i();
         int get_j();
-    
+        Pair& operator= (const Pair& p);
 };
-
-
-    
-    
