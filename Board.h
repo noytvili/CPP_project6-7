@@ -14,12 +14,14 @@ class Board{
     public :
         newChar**board;
         Board(int n); //constructor
+        Board(const Board& b1); // copyConstructor
        // ~Board(); //destructor
         int getSize();
          newChar operator[](const Pair &p) const;
          newChar& operator[](const Pair &p);
          Board& operator= (char c);
          Board& operator=(const Board& b1);
+         //char operator= (const Board& b1);
 
     
     //----------------------------------
