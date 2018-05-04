@@ -11,7 +11,7 @@ using namespace std;
      c='.';   
     }
     
-    newChar& newChar::operator= (const char c1){
+    newChar newChar::operator= (const char c1){
         if(c1!='X' && c1!='O' && c1!='.'){
             throw IllegalCharException(c1);
         }
@@ -21,8 +21,9 @@ using namespace std;
         return *this;
     }
     
-    newChar& newChar::operator= (const newChar& c1){
+    char newChar::operator= (const newChar& c1){
         c = c1.c;
-        return *this;
+        return c;
     }
 
+  
