@@ -13,8 +13,8 @@ class newChar{
     public :
         friend ostream& operator<< (ostream& os, const newChar& nc);
         newChar();
-        newChar& operator= (const char c1);
-        newChar& operator= (const newChar& c1);
+        newChar operator= (const char c1);
+        char operator= (const newChar& c1);
 
 };
 
