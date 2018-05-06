@@ -7,13 +7,10 @@ Board:: Board(int n){ //constructor
     board = new newChar*[size];  //allocBoard
 	for (int i = 0; i < size; i++){
 		board[i] = new newChar[size];
-        for (int j = 0; j < size; j++) {
-            board[i][j] = '.';
-        }
     }
 }
 
-Board:: Board(const Board& b1){ //constructor
+Board:: Board(const Board& b1){ //copy constructor
     size = b1.size;
     board = new newChar*[size];  //allocBoard
 	for (int i = 0; i < size; i++){
@@ -23,11 +20,7 @@ Board:: Board(const Board& b1){ //constructor
         }
     }
 }
-// Board:: ~Board(){  //distructor
-//     for (int i = 0; i < size; i++) //free
-// 	    delete[] board[i];
-// 	delete[] board;
-// }
+
 
 int Board:: getSize(){
     return size;
@@ -71,9 +64,8 @@ Board& Board::operator=(const Board& b1){
         }
     
 
-// char Board::operator= (const Board& b1){
-//     char temp = b1.board[get_i()][get_j()];
-//     return temp;
-    
-    
-// }
+Board:: ~Board(){  //distructor
+    for (int i = 0; i < size; i++) //free
+	    delete[] board[i];
+	delete[] board;
+}
