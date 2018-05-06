@@ -14,10 +14,10 @@ class newChar{
         friend ostream& operator<< (ostream& os, const newChar& nc);
         newChar();
         newChar operator= (const char c1);
-        char operator= (const newChar& c1);
-
+        operator char() ;
+        
 };
 
-    inline ostream& operator<< (ostream& os, const newChar& nc){
+    inline ostream& operator<< (ostream& os, const newChar& nc){ //cout
     return os << nc.c;
 }
