@@ -7,11 +7,11 @@
 using namespace std;
 
 
-    newChar::newChar(){
+    newChar::newChar(){ //constructor
      c='.';   
     }
     
-    newChar newChar::operator= (const char c1){
+    newChar newChar::operator= (const char c1){ // newChar = char
         if(c1!='X' && c1!='O' && c1!='.'){
             throw IllegalCharException(c1);
         }
@@ -20,10 +20,9 @@ using namespace std;
         }
         return *this;
     }
-    
-    char newChar::operator= (const newChar& c1){
-        c = c1.c;
-        return c;
-    }
 
-  
+    newChar::operator char() { //casting operator from nweChar to char
+    return c;
+    }
+    
+    
