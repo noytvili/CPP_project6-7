@@ -39,13 +39,13 @@ using namespace std;
 
     }
     
-    bool Piece::operator==(const newChar &c1) const {
+    bool newChar::operator==(const newChar &c1) const {
         return c==c1.c;
 
         
     }
     
-    bool Piece::operator!=(const newChar &c1) const {
+    bool newChar::operator!=(const newChar &c1) const {
         return c!=c1.c;
         
     }
