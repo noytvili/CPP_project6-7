@@ -20,6 +20,7 @@ class Board{
          newChar& operator[](const Pair &p);
          Board& operator= (char c);
          Board& operator=(const Board& b1);
+         bool operator==(const Board &b1) const;
          void clear();
          ~Board(); //destructor
     
