@@ -16,6 +16,14 @@ class newChar{
         newChar(char c1);
         newChar& operator= (const char c1);
         operator char() ;
+        bool operator==(char c) const;
+        bool operator!=(char c) const;
+        bool operator==(const newChar &c1) const;
+        bool operator!=(const newChar &c1) const;
+
+
+
+
         
 };
 
