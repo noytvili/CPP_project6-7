@@ -11,7 +11,12 @@ using namespace std;
      c='.';   
     }
     
-    newChar newChar::operator= (const char c1){ // newChar = char
+    newChar::newChar(char c1){
+        c=c1;
+    }
+    
+  
+    newChar& newChar::operator= (const char c1){ // newChar = char
         if(c1!='X' && c1!='O' && c1!='.'){
             throw IllegalCharException(c1);
         }
