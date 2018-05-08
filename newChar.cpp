@@ -30,4 +30,22 @@ using namespace std;
     return c;
     }
     
+    bool newChar::operator==(char c1) const {
+        return c==c1;
+    }
     
+    bool newChar::operator!=(char c1) const {
+        return c!=c1;
+
+    }
+    
+    bool Piece::operator==(const newChar &c1) const {
+        return c==c1.c;
+
+        
+    }
+    
+    bool Piece::operator!=(const newChar &c1) const {
+        return c!=c1.c;
+        
+    }
