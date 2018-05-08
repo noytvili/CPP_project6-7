@@ -68,6 +68,18 @@ Board& Board::operator=(const Board& b1){
     return *this;
         }
     
+bool Board::operator==(const Board &b1) const {
+    if (size != b1.size)
+        return false;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            if (board[i][j] != b1.board[i][j])
+                return false;
+        }
+    }
+    return true;
+}
+
 
 void Board:: clear(){  //distructor
     for (int i = 0; i < size; i++) //free
