@@ -1,7 +1,7 @@
 CCX=g++ -std=c++11
 
 
-a.out: Board.o Pair.o newChar.o IllegalCoordinateException.o IllegalCoordinateException.o 
+a.out: Board.o Pair.o newChar.o IllegalCoordinateException.o IllegalCharException.o 
 		$(CCX) main.cpp *.o
 		
 Board.o: Board.cpp Board.h
@@ -13,7 +13,7 @@ Pair.o: Pair.cpp Pair.h
 newChar.o: newChar.cpp newChar.h
 		$(CCX) -c newChar.cpp
 
-Exceptions.o: IllegalCoordinateException.cpp IllegalCoordinateException.cpp
+Exceptions.o: IllegalCoordinateException.cpp IllegalCharException.cpp
 		$(CCX) -c Exceptions.cpp
 		
 Clean:
