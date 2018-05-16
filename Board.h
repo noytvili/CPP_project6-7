@@ -16,8 +16,8 @@ class Board{
         Board(int n); //constructor
         Board(const Board& b1); // copyConstructor
         int getSize() const;
-         newChar operator[](const Pair &p) const;
-         newChar& operator[](const Pair &p);
+         newChar operator[](const Coordinate &p) const;
+         newChar& operator[](const Coordinate &p);
          Board& operator= (char c);
          Board& operator=(const Board& b1);
          bool operator==(const Board &b1) const;
