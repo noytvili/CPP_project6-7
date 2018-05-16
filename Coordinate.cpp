@@ -23,7 +23,7 @@ int Coordinate :: get_j() const{
 
 
 
-Coordinate& Coordinate:: operator= (const Pair& p){
+Coordinate& Coordinate:: operator= (const Coordinate& p){
     this->i = p.get_i();
     this->j = p.get_j();
     return *this;
