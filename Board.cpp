@@ -27,11 +27,11 @@ int Board:: getSize() const{
     return size;
 }
 
- newChar Board::operator[](const Pair &p) const {  //לקריאה בלבד
+ newChar Board::operator[](const Coordinate &p) const {  //לקריאה בלבד
     return board[p.get_i()][p.get_j()];
 }
 
- newChar& Board::operator[](const Pair &p) { //לשנות את הערך
+ newChar& Board::operator[](const Coordinate &p) { //לשנות את הערך
     if ((p.get_i() >= size || p.get_i() < 0) || (p.get_j() >= size || p.get_j() < 0)){
         throw IllegalCoordinateException(p);
     }
