@@ -1,17 +1,17 @@
 #include <iostream>
 using namespace std;
 
-class Pair{
+class Coordinate{
     private:
         int i;
         int j;
         
     public:
        // pair();
-        Pair(int x, int y);
+        Coordinate(int x, int y);
         int get_i() const;
         int get_j() const;
-        Pair& operator= (const Pair& p);
+        Coordinate& operator= (const Coordinate& p);
     
 };
 
