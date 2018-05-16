@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Pair.h"
+#include "Coordinate.h"
 using namespace std;
 
     
@@ -8,22 +8,22 @@ using namespace std;
     //     j=0;
     // }
     
-Pair :: Pair(int x, int y){ //constuctor
+Coordinate :: Coordinate(int x, int y){ //constuctor
     i=x;
     j=y;
 }
     
-int Pair :: get_i() const{
+int Coordinate :: get_i() const{
     return i;
 }    
     
-int Pair :: get_j() const{
+int Coordinate :: get_j() const{
     return j;
 }      
 
 
 
-Pair& Pair:: operator= (const Pair& p){
+Coordinate& Coordinate:: operator= (const Pair& p){
     this->i = p.get_i();
     this->j = p.get_j();
     return *this;
