@@ -1,21 +1,33 @@
-//#include "Board.h"
-//#include "Player.h"
 #include "TicTacToe.h"
     
-TicTacToe::TicTacToe(int n){
+TicTacToe::TicTacToe(int n){  //constructor
     board.size=n;
 }
 
-const void TicTacToe:: play(Player player1, Player player2){
-    //לולאה עם המשחק ובדיקות ניצחון
+const void TicTacToe:: play(Player& player_X, Player& player_O){  //loop with the game
+    bool win;
+    
+    while(!Winning(player_X, player_O)){
+        if(win){
+            game_board[player_X.play()] = player_X.getChar();  //where X will play   ???
+            win = false;
+        }
+        else{
+            game_board[player_O.play()] = player_O.getChar();  //where O will play  ???
+            win = true;
+        }
+    }
+}
+
+bool TicTacToe:: Winning(Player& player_X, Player& player_O){  //check winnig for the game
+
 }
     
-TicTacToe:: Player winner(){
-    //מחזיר את השחקן המנצח
+const Player& TicTacToe:: winner() const{
+    return *game_winner;
 }
 
-TicTacToe:: Board board(){
-    //מחזירה את הלוח בסוף המשחק
+Board& TicTacToe:: board() const{
+    return *game_board;
 }
-
     
