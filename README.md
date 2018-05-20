@@ -1,5 +1,4 @@
-"# CPP_project6-7" 
-"# Process-Monitor" 
-"# Process_Monitor" 
-"# Process-Monitor" 
-"# Process_Monitor" 
+TicTacToe game-
+
+In this project we created the TicTacToe game.
+The board is dynamic, you can choose the size.
