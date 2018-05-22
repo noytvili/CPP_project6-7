@@ -4,11 +4,11 @@
 
 class Player {
     public:
-    char player_char;
+    newChar player_char;
 	virtual const string name() const =0;
 	virtual const Coordinate play(const Board& board)=0;
 
-	char getChar(){
+	newChar getChar(){
 	    return player_char;
 	}
 };
