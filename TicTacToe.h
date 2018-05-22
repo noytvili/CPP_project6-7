@@ -1,11 +1,10 @@
-#include "Board.h"
 #include "Player.h"
 #pragma once
 
 class TicTacToe {
     private:
-       Board* game_board;
-       Player* game_winner;
+       Board game_board;
+       Player game_winner;
        bool Winning(Player& player_X, Player& player_O);
     
     public:
