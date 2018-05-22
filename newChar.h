@@ -2,31 +2,41 @@
 //#include "IllegalCoordinateException.cpp"
 //#include "IllegalCharException.cpp"
 
-
 using namespace std;
 
 class newChar{
-  
     private :
-        char c;
+        
     
     public :
+    char c;
         friend ostream& operator<< (ostream& os, const newChar& nc);
         newChar();
-        newChar(char c1);
         newChar& operator= (const char c1);
-        operator char() ;
-        bool operator==(char c) const;
-        bool operator!=(char c) const;
-        bool operator==(const newChar &c1) const;
-        bool operator!=(const newChar &c1) const;
-
-
-
-
-        
+        char& operator= (const newChar& c1);
+        bool operator== ( newChar c1,  char c2);
+        bool operator!= ( newChar c1,  char c2);
+        bool operator== ( newChar c1,  newChar c2);
+        bool operator!= ( newChar c1,  newChar c2);
 };
 
-    inline ostream& operator<< (ostream& os, const newChar& nc){ //cout
+
+    inline bool operator== ( newChar c1,  char c2){
+        return c1.c==c2;
+    } 
+    
+    inline bool operator!= ( newChar c1,  char c2){
+        return c1.c!=c2;
+    }
+    
+    inline bool operator== ( newChar c1,  newChar c2){
+        return c1.c==c2.c;
+    } 
+    
+    inline bool operator!= ( newChar c1,  newChar c2){
+        return c1.c!=c2.c;
+    }
+    
+    inline ostream& operator<< (ostream& os, const newChar& nc){
     return os << nc.c;
-}
+    }
