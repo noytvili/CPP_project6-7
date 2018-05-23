@@ -11,26 +11,27 @@ Board:: Board(int n){ //constructor
 }
 
 Board:: Board(const Board& b1){ //copy constructor
+int i,j;
     Size = b1.Size;
     board = new newChar*[Size];  //allocBoard
-	for (int i = 0; i < Size; i++){
+	for (i = 0; i < Size; i++){
 		board[i] = new newChar[Size];
-        for (int j = 0; j < Size; j++) {
-            board[i][j] = b1.board[i][j];
-        }
-    }
+        for (j = 0; j < Size; j++) 
+           // board[i][j] = b1.board[i][j];
+           board[i][j] = newChar(b1.board[i][j]);
+	}
+
 }
 
 int Board:: size() const{
     return Size;
 }
 
- newChar Board::operator[](const Coordinate &p)  {  //לקריאה בלבד
-    //cout << "c";
+ newChar Board::operator[](const Coordinate &p) const {  //לקריאה בלבד
     return board[p.get_i()][p.get_j()];
 }
 
- newChar& Board::operator[](const Coordinate &p)const { //לשנות את הערך
+ newChar& Board::operator[](const Coordinate &p) { //לשנות את הערך
     if ((p.get_i() >= Size || p.get_i() < 0) || (p.get_j() >= Size || p.get_j() < 0)){
         throw IllegalCoordinateException(p);
     }
@@ -38,32 +39,54 @@ int Board:: size() const{
 }
 
 Board& Board::operator= (char c){
-     Board boradNew(*this);
     if(c!='X' && c!='O' && c!='.'){
         throw IllegalCharException(c);
     }
     else{
-	   delete[] board;
         for(int i = 0; i < Size; i++)
             for(int j = 0; j < Size; j++)
-                boradNew.board[i][j] = c;
+                board[i][j] = c;
     }
-    this->board=boradNew.board;
     return *this;
 }
 
 Board& Board::operator=(const Board& b1){
+    
      if (this==&b1){
             return *this;
      }
-        Board boradNew(b1);
-            this->board=boradNew.board;
-            return *this;
+
+    clear();
+    Size = b1.Size;
+    board = new newChar*[Size];  //allocBoard
+	for (int i = 0; i < Size; i++){
+		board[i] = new newChar[Size];
+        for (int j = 0; j < Size; j++) 
+            board[i][j] = b1.board[i][j];
+        
+    }
+    return *this;
         }
+    
+bool Board::operator==(const Board &b1) const {
+    if (Size != b1.Size)
+        return false;
+    for (int i = 0; i < Size; ++i) {
+        for (int j = 0; j < Size; ++j) {
+            if (board[i][j] != b1.board[i][j])
+                return false;
+        }
+    }
+    return true;
+}
 
 
-Board:: ~Board(){  //distructor
+void Board:: clear(){  //distructor
     for (int i = 0; i < Size; i++) //free
 	    delete[] board[i];
 	delete[] board;
+}
+
+Board:: ~Board(){  //distructor
+    clear();
 }
