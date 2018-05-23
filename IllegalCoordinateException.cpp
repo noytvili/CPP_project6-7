@@ -1,20 +1,17 @@
 #include <exception>
 #include <string>
-#include "Pair.h"
+#include "Coordinate.h"
 
 using namespace std;
 
-
-
 class IllegalCoordinateException{
     private:
-        const Pair &p;
+        const Coordinate &c;
     public:
-        IllegalCoordinateException(const  Pair &p) : p(p){}
-
+        IllegalCoordinateException(const  Coordinate &c) : c(c){}
 
 string theCoordinate() const{
-    return string(to_string(p.get_i()) + "," + to_string(p.get_j()));
+    return string(to_string(c.get_i()) + "," + to_string(c.get_j()));
     
 }
 };
