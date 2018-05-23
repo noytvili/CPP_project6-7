@@ -16,47 +16,49 @@ Board TicTacToe::board() const
 const void TicTacToe:: play(Player& player_X, Player& player_O){  //loop with the game
     bool win=true;
  //   cout << "******play***" << endl;
-    player_X.myChar='X';
-    player_O.myChar='O';
-
+    player_X.setChar('X');
+    player_O.setChar('O');
+    
+   game_board='.';
     while(!Winning(player_X, player_O)){
-  //  cout << "******while****" << endl;
+        //cout << game_board << endl;
 
         if(win){
   //  cout << "******if****" << endl;
 
             try{
-                if(game_board[player_X.play(game_board)] == '.'){
-                    game_board[player_X.play(game_board)] = player_X.getChar();  //where X will play
-  //  cout << "******x****" << endl;
+                Coordinate p = player_X.play(game_board);
+                if(game_board[p] == '.'){
+                    game_board[p] = player_X.getChar();  //where X will play
+                   // cout << "******x****" << p << player_X.getChar() << endl;
                 }
                 else{
                     game_winner = &player_O;
-                    return;
+                    break;
                 }   
             }
             catch(string& ex){
                 game_winner = &player_O;
-                return;
+                break;
             }
         win = false;
 
         }
         else{
             try{
-                if(game_board[player_O.play(game_board)] == '.'){
-                    game_board[player_O.play(game_board)] = player_O.getChar();  //where O will play
-   // cout << "******o****" << endl;
-
+                Coordinate p = player_O.play(game_board);
+                if(game_board[p] == '.'){
+                    game_board[p] = player_O.getChar();  //where O will play
+                 //   cout << "******o****" << p << player_O.getChar() << endl;
                 }
                 else{
                     game_winner = &player_X;
-                    return; 
+                    break; 
                 }
             }
             catch(string& ex){
-                game_winner = &player_O;
-                return;
+                game_winner = &player_X;
+                break;
             }
         win = true; 
 
@@ -67,12 +69,11 @@ const void TicTacToe:: play(Player& player_X, Player& player_O){  //loop with th
 bool TicTacToe:: Winning(Player& player_X, Player& player_O){  //check winnig for the game
     newChar c2;
     c2 = game_board[{0,0}];
-    bool flag = true;
     //check row
 
     for (uint j = 0; j < b_size; j++) {
         c2 = game_board[{0,j}];
-       if(c2.c != '.'){
+       if(c2 != '.'){
            for (uint i = 1; i < b_size; i++) {
                if(game_board[{i,j}] != c2) break;
                if(i == b_size-1){
@@ -93,7 +94,7 @@ bool TicTacToe:: Winning(Player& player_X, Player& player_O){  //check winnig fo
     //check colum
     for (uint i = 0; i < b_size; i++) {
         c2 = game_board[{i,0}];
-       if(c2.c != '.'){
+       if(c2 != '.'){
            for (uint j = 1; j < b_size; j++) {
                if(game_board[{i,j}] != c2) break;
                if(j == b_size-1){
@@ -113,10 +114,15 @@ bool TicTacToe:: Winning(Player& player_X, Player& player_O){  //check winnig fo
     
     //check left diagonal
     c2 = game_board[{0,0}];
-    if(c2.c != '.'){
+
+    if(c2 != '.'){
+                                  //cout << "----------for 3----------" << endl;
+
         for (uint i = 1; i < b_size; i++) {
+
             if(game_board[{i,i}] != c2) break;
                 if(i == b_size-1){
+
                     if(player_X.getChar() == c2.c){
                         game_winner = &player_X;
                    }
@@ -134,7 +140,7 @@ bool TicTacToe:: Winning(Player& player_X, Player& player_O){  //check winnig fo
     //check right diagonal
     uint size_uint = b_size;
     c2 = game_board[{0,size_uint-1}];
-    if(c2.c != '.'){
+    if(c2 != '.'){
         for (uint i = 1; i < b_size; i++) {
             if(game_board[{i,(b_size-i-1)}] != c2) break;
                 if(i == b_size-1){
@@ -151,18 +157,14 @@ bool TicTacToe:: Winning(Player& player_X, Player& player_O){  //check winnig fo
            }
        }
     
-    // while(flag){
-    //     for (uint i = 0; i < b_size; i++) {
-    //         for (uint j = 0; j < b_size; j++) {
-    //             if(game_board[{i,j}] == '.') flag = false;
-    //         }
-    //     }
-    //     game_winner = &player_O;
-    // //   cout << "----------while full board----------" << endl;
 
-    //     return false;
-    // }
- return false;   
+    for (uint i = 0; i < b_size; i++) {
+        for (uint j = 0; j < b_size; j++) {
+            if(game_board[{i,j}] == '.') return false;
+        }
+    }
+    game_winner = &player_O;
+    return true;   
 
 }
     
