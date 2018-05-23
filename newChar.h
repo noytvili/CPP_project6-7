@@ -19,11 +19,7 @@ class newChar{
         bool operator== (  newChar c2);
         bool operator!= ( newChar c2);
 };
-
-
- 
-
-    
+  
     inline ostream& operator<< (ostream& os, const newChar& nc){
     return os << nc.c;
     }
