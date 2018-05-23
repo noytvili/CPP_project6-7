@@ -4,9 +4,9 @@ using namespace std;
 
 Board:: Board(int n){ //constructor
     Size = n;
-    board = new newChar*[size];  //allocBoard
-	for (int i = 0; i < size; i++){
-		board[i] = new newChar[size];
+    board = new newChar*[Size];  //allocBoard
+	for (int i = 0; i < Size; i++){
+		board[i] = new newChar[Size];
     }
 }
 
@@ -21,16 +21,16 @@ Board:: Board(const Board& b1){ //copy constructor
     }
 }
 
-int Board:: size(){
+int Board:: size() const{
     return Size;
 }
 
- newChar Board::operator[](const Coordinate &p) const {  //לקריאה בלבד
+ newChar Board::operator[](const Coordinate &p)  {  //לקריאה בלבד
     //cout << "c";
     return board[p.get_i()][p.get_j()];
 }
 
- newChar& Board::operator[](const Coordinate &p) { //לשנות את הערך
+ newChar& Board::operator[](const Coordinate &p)const { //לשנות את הערך
     if ((p.get_i() >= Size || p.get_i() < 0) || (p.get_j() >= Size || p.get_j() < 0)){
         throw IllegalCoordinateException(p);
     }
