@@ -1,5 +1,4 @@
 #include "Player.h"
-
 #pragma once
 
 class TicTacToe {
