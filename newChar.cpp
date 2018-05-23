@@ -32,10 +32,10 @@ char& newChar::operator= (const newChar& c1){
         return c!=c2.c;
     }
     
-    bool newChar::operator== (  char c2){
+    bool newChar::operator== ( char c2){
         return c==c2;
     } 
     
-    bool newChar::operator!= (  char c2){
+    bool newChar::operator!= ( char c2){
         return c!=c2;
     }
