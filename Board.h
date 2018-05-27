@@ -16,7 +16,7 @@ class Board{
         Board(const Board& b1); // copyConstructor
         int size() const;
     friend ostream &operator<<(ostream &os, const Board& b);
-        friend istream &operator>>(istream &os, const Board& b);  //input   ??
+        //friend istream &operator>>(istream &os, const Board& b);  //input   ??
 
          newChar operator[](const Coordinate &p) const;
          newChar& operator[](const Coordinate &p);
@@ -43,13 +43,14 @@ class Board{
         return os;
     }
 
-    inline istream &operator>>(istream &is, const Board& b) {  //input   ??
-        for (int i = 0; i < b.size(); i++) {
-            for (int j = 0; j < b.size(); j++) {
-                is >> b.board[i][j];
-            }
-            is>>endl;
-        }
-    return is;
+//     inline istream &operator>>(istream &is, const Board& b) {  //input   ??
+//         for (int i = 0; i < b.size(); i++) {
+//             for (int j = 0; j < b.size(); j++) {
+//                 is >> b.board[i][j];
+//             }
+//             is>>endl;
+//         }
+//     return is;
 
  
+//     }
