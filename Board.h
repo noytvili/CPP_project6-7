@@ -1,10 +1,21 @@
 #include <iostream>
+#include <fstream>
 #include "newChar.h"
 //include "Coordinate.h"
 #include "IllegalCoordinateException.cpp"
 //#include "IllegalCharException.cpp"
+#include <string>
 #pragma once
 using namespace std;
+
+struct RGB {
+  uint8_t red, green, blue;
+public:
+  RGB() {}
+  RGB(uint8_t red, uint8_t green, uint8_t blue): red(red), green(green), blue(blue) {}
+};
+
+
 
 class Board{
     private :
@@ -13,23 +24,21 @@ class Board{
     public :
         newChar**board;
         Board(int n); //constructor
+        Board();
         Board(const Board& b1); // copyConstructor
         int size() const;
-    friend ostream &operator<<(ostream &os, const Board& b);
-        //friend istream &operator>>(istream &os, const Board& b);  //input   ??
+        friend ostream &operator<<(ostream &os, const Board& b);  //output
+        friend istream &operator>>(istream &is,  Board& b);  //input   
 
          newChar operator[](const Coordinate &p) const;
          newChar& operator[](const Coordinate &p);
          Board& operator= (char c);
          Board& operator=(const Board& b1);
          bool operator==(const Board &b1) const;
+         string draw(int n);
          void clear();
          ~Board(); //destructor
     
-    //----------------------------------
-    // friend global IO operators
-    //----------------------------------
-    //  friend istream& operator>> (istream& input,  Board& b);  // (cin)
 };
 
     inline ostream &operator<<(ostream &os, const Board& b) {  //toString (cout)
@@ -43,14 +52,19 @@ class Board{
         return os;
     }
 
-//     inline istream &operator>>(istream &is, const Board& b) {  //input   ??
-//         for (int i = 0; i < b.size(); i++) {
-//             for (int j = 0; j < b.size(); j++) {
-//                 is >> b.board[i][j];
-//             }
-//             is>>endl;
-//         }
-//     return is;
-
- 
-//     }
+    inline istream &operator>>(istream &is,  Board& b) {  //input   
+        string line;
+        cin>>line;
+       int n = line.length();
+        Board temp(n);
+   
+        for (int i = 0; i < temp.size(); i++) {
+            for (int j = 0; j < temp.size(); j++){ 
+                    temp.board[i][j]=line[j];
+                }
+                //line="";
+                cin>>line;
+            }
+        b=temp;
+        return is;
+    }
