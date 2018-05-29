@@ -1,21 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include "newChar.h"
-//include "Coordinate.h"
 #include "IllegalCoordinateException.cpp"
-//#include "IllegalCharException.cpp"
 #include <string>
 #pragma once
 using namespace std;
 
 struct RGB {
-  uint8_t red, green, blue;
-public:
-  RGB() {}
-  RGB(uint8_t red, uint8_t green, uint8_t blue): red(red), green(green), blue(blue) {}
+    uint8_t red, green, blue;
+    public:
+        RGB() {}
+        RGB(uint8_t red, uint8_t green, uint8_t blue): red(red), green(green), blue(blue) {}
 };
-
-
 
 class Board{
     private :
@@ -35,10 +31,9 @@ class Board{
          Board& operator= (char c);
          Board& operator=(const Board& b1);
          bool operator==(const Board &b1) const;
-         string draw(int n);
          void clear();
          ~Board(); //destructor
-    
+         const string draw(int n);
 };
 
     inline ostream &operator<<(ostream &os, const Board& b) {  //toString (cout)
@@ -46,8 +41,7 @@ class Board{
             for (int j = 0; j < b.size(); j++) {
                 os << b.board[i][j];
             }
-                        os<<endl;
-
+            os<<endl;
         }
         return os;
     }
@@ -57,7 +51,6 @@ class Board{
         cin>>line;
        int n = line.length();
         Board temp(n);
-   
         for (int i = 0; i < temp.size(); i++) {
             for (int j = 0; j < temp.size(); j++){ 
                     temp.board[i][j]=line[j];
