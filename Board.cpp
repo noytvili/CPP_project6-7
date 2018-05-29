@@ -1,7 +1,17 @@
 #include "Board.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 
+Board:: Board(){
+    Size =0;
+      board = new newChar*[Size];  //allocBoard
+	for (int i = 0; i < Size; i++){
+		board[i] = new newChar[Size];
+	}  
+}
+    
 Board:: Board(int n){ //constructor
     Size = n;
     board = new newChar*[Size];  //allocBoard
@@ -89,4 +99,31 @@ void Board:: clear(){  //distructor
 
 Board:: ~Board(){  //distructor
     clear();
+}
+
+string Board :: draw(int n){
+    int num_pic=1;
+  const int dimx = n, dimy = n;
+  ofstream imageFile("pic"+to_string(num_pic)+".ppm", ios::out | ios::binary); // filename-pic1.ppm,pic2.ppm...
+  num_pic++;
+  
+  imageFile << "P6" << endl << dimx <<" " << dimy << endl << 255 << endl;
+  RGB image[16];
+  for (int j = 0; j < dimy; ++j)  {  // row
+    for (int i = 0; i < dimx; ++i) { // column
+      image[dimx*j+i].red = (i % 256);
+      image[dimx*j+i].green = (j % 256);
+      image[dimx*j+i].blue = ( (i*i+j*j) % 256);
+    }
+  }
+  image[0].red = 255;
+  image[0].blue = 0;
+  image[0].green = 0;
+  ///
+  ///image processing
+  ///
+  imageFile.write(reinterpret_cast<char*>(&image), 3*dimx*dimy);
+  imageFile.close();
+    
+    
 }
