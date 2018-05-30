@@ -97,18 +97,20 @@ Board:: ~Board(){  //distructor
     clear();
 }
 
+bool Board::isExists(string fileName) {
+    ifstream infile(fileName);
+    return infile.good();
+}
 
- string Board :: draw(int n){  
-static int num_pic=1;
+ const string Board :: draw(int n){  
+    int num_pic = 1;
     const int dimx = n, dimy = n;
-    string filename = "pic"+to_string(num_pic)+".ppm";
-    num_pic++;
-    ofstream imageFile(filename, ios::out | ios::binary); // filename-pic1.ppm,pic2.ppm...
     int cell = n / Size; 
     int width = cell / 5;
     int red_board, green_board, blue_board;
-    imageFile << "P6" << endl << dimx <<" " << dimy << endl << 255 << endl;
+    string filename = "pic"+to_string(num_pic)+".ppm";
     RGB image[dimx*dimy];
+    
     //backGround of the board
     for (int j = 0; j < dimy; ++j)  {  // row
         for (int i = 0; i < dimx; ++i) { // column
@@ -116,9 +118,9 @@ static int num_pic=1;
             image[dimx*j+i].green = (233);
             image[dimx*j+i].blue = (197);
         }
-  }
-  //bounds
-  for (int i = 0; i <dimx; ++i) {//row
+    }
+    //bounds
+    for (int i = 0; i <dimx; ++i) {//row
         for (int j = 0; j < dimx; ++j) {//column
             if(i%(dimx /Size) == 0 || j%(dimx /Size) == 0  || i%(dimx-5/Size) == 0|| j%(dimx-5/Size) == 0) {
                 image[dimx*i + j].red = 0;
@@ -132,21 +134,7 @@ static int num_pic=1;
     for (int i = 0; i < Size; ++i) {
         for (int j = 0; j < Size; ++j) {
             char cur = board[i][j].getChar();
-            if(cur == 'O'){  //תכלת
-                red_board = 97;
-                green_board = 208;
-                blue_board = 214;
-            }
-            else if (cur == 'X'){  //סגול
-                red_board = 120;
-                green_board = 140;
-                blue_board = 200;
-            }
-            else{  //ורוד
-                red_board = 210;
-                green_board = 11;
-                blue_board = 141;
-            }
+
             for (int k = i*cell+width; k < i*cell+cell-width; ++k) {
                 for (int y = j*cell+width; y < j*cell+cell-width; ++y) {
                     image[dimx*j+i].red = red_board;
@@ -154,9 +142,8 @@ static int num_pic=1;
                     image[dimx*j+i].green = green_board; 
                 }
             }
-        
             //for "X"
-            if(cur == 'X'){
+            if(cur == 'X'){    
                 int Right = j*cell+cell-width-1;
                 int Left = j*cell+width;
                 int q = 0;
@@ -172,7 +159,7 @@ static int num_pic=1;
                     q++;
                 }
             }
-                // for 'O'
+            // for 'O'
             if (cur == 'O'){
                 double r = cell/2-2*width;
                 double xMid = (j*cell+width)/2 + (j*cell+cell-width)/2;
@@ -182,7 +169,7 @@ static int num_pic=1;
                         double d = pow(xMid-l,2) + pow(yMid-p,2);
                         d = sqrt(d);
                         d = abs(d-r);
-                        if(d < 40){
+                        if(d < 10){
                             image[dimx*p+l].red = (210);
                             image[dimx*p+l].green = (11);
                             image[dimx*p+l].blue = (141);
@@ -191,10 +178,18 @@ static int num_pic=1;
                 }
             }
         
-        }   //end second big for
+        }   
     }
+    
   ///image processing///
-  imageFile.write(reinterpret_cast<char*>(&image), 3*dimx*dimy);
-  imageFile.close();
-  return filename;
+    while(isExists(filename)) {
+        ++num_pic;
+        filename = "pic" + to_string(num_pic) + ".ppm";
+    }
+    ofstream imageFile(filename, ios::out | ios::binary);
+    imageFile << "P6" << endl << dimx << " " << dimy << endl << 255 << endl;
+  
+    imageFile.write(reinterpret_cast<char*>(&image), 3*dimx*dimy);
+    imageFile.close();
+    return filename;
 }
