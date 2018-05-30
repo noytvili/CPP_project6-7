@@ -33,7 +33,8 @@ class Board{
          bool operator==(const Board &b1) const;
          void clear();
          ~Board(); //destructor
-          string draw(int n);
+          const string draw(int n);
+          bool isExists(string fileName);
 };
 
     inline ostream &operator<<(ostream &os, const Board& b) {  //toString (cout)
