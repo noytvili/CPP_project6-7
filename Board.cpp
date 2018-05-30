@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <iostream>
-#include <math.h>
+#include <cmath>
+//#include <list>
 using namespace std;
 
 Board:: Board(){
@@ -97,7 +98,7 @@ Board:: ~Board(){  //distructor
 }
 
 
-const string Board :: draw(int n){  
+ string Board :: draw(int n){  
     int num_pic=1;
     const int dimx = n, dimy = n;
     string filename = "pic"+to_string(num_pic)+".ppm";
