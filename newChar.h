@@ -13,15 +13,16 @@ class newChar{
         newChar();
         newChar& operator= (const char c1);
         char& operator= (const newChar& c1);
-         bool operator== (   char c2);
-         bool operator!= (  char c2);
+        bool operator== (   char c2);
+        bool operator!= (  char c2);
         bool operator== (  newChar c2);
         bool operator!= ( newChar c2);
+        
+        char getChar() const{
+	       return c;
+	}
+    
 };
-
-
- 
-
     
     inline ostream& operator<< (ostream& os, const newChar& nc){
     return os << nc.c;
