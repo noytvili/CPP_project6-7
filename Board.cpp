@@ -99,7 +99,7 @@ Board:: ~Board(){  //distructor
 
 
  string Board :: draw(int n){  
-    int num_pic=1;
+static int num_pic=1;
     const int dimx = n, dimy = n;
     string filename = "pic"+to_string(num_pic)+".ppm";
     num_pic++;
@@ -107,7 +107,6 @@ Board:: ~Board(){  //distructor
     int cell = n / Size; 
     int width = cell / 5;
     int red_board, green_board, blue_board;
-    char cur;
     imageFile << "P6" << endl << dimx <<" " << dimy << endl << 255 << endl;
     RGB image[dimx*dimy];
     //backGround of the board
@@ -118,16 +117,27 @@ Board:: ~Board(){  //distructor
             image[dimx*j+i].blue = (197);
         }
   }
+  //bounds
+  for (int i = 0; i <dimx; ++i) {//row
+        for (int j = 0; j < dimx; ++j) {//column
+            if(i%(dimx /Size) == 0 || j%(dimx /Size) == 0  || i%(dimx-5/Size) == 0|| j%(dimx-5/Size) == 0) {
+                image[dimx*i + j].red = 0;
+                image[dimx*i + j].blue = 0;
+                image[dimx*i + j].green = 0;
+            }
+        }
+    }
+    
     //paint X / O / . :
-    for (int i = 0; i < Size; i++) 
-        for (int j = 0; j < Size; j++) {
-            cur = board[i][j].getChar();
-            if(cur = 'O'){  //תכלת
+    for (int i = 0; i < Size; ++i) {
+        for (int j = 0; j < Size; ++j) {
+            char cur = board[i][j].getChar();
+            if(cur == 'O'){  //תכלת
                 red_board = 97;
                 green_board = 208;
                 blue_board = 214;
             }
-            else if (cur = 'X'){  //סגול
+            else if (cur == 'X'){  //סגול
                 red_board = 120;
                 green_board = 140;
                 blue_board = 200;
@@ -144,7 +154,25 @@ Board:: ~Board(){  //distructor
                     image[dimx*j+i].green = green_board; 
                 }
             }
-            // for 'O'
+        
+            //for "X"
+            if(cur == 'X'){
+                int Right = j*cell+cell-width-1;
+                int Left = j*cell+width;
+                int q = 0;
+                for (int p = i*cell+width; p < i*cell+cell-width; ++p) {
+                    //left diagonal
+                    image[dimx*p+Left+q].red = (120);
+                    image[dimx*p+Left+q].green = (140);
+                    image[dimx*p+Left+q].blue = (200);
+                    //right diagonal
+                    image[dimx*p+Right-q].red = (120);
+                    image[dimx*p+Right-q].green = (140);
+                    image[dimx*p+Right-q].blue = (200);
+                    q++;
+                }
+            }
+                // for 'O'
             if (cur == 'O'){
                 double r = cell/2-2*width;
                 double xMid = (j*cell+width)/2 + (j*cell+cell-width)/2;
@@ -154,33 +182,17 @@ Board:: ~Board(){  //distructor
                         double d = pow(xMid-l,2) + pow(yMid-p,2);
                         d = sqrt(d);
                         d = abs(d-r);
-                        if(d < 10){
-                            image[dimx*p+l].red = (101);
-                            image[dimx*p+l].green = (63);
-                            image[dimx*p+l].blue = (63);
+                        if(d < 40){
+                            image[dimx*p+l].red = (210);
+                            image[dimx*p+l].green = (11);
+                            image[dimx*p+l].blue = (141);
                         }
                     }
                 }
             }
-            else if(cur == 'X'){
-                int Right = j*cell+cell-width-1;
-                int Left = j*cell+width;
-                int q = 0;
-                for (int p = i*cell+width; p < i*cell+cell-width; ++p) {
-                    //left diagonal
-                    image[dimx*p+Left+q].red = (101);
-                    image[dimx*p+Left+q].green = (63);
-                    image[dimx*p+Left+q].blue = (63);
-                    //right diagonal
-                    image[dimx*p+Right-q].red = (101);
-                    image[dimx*p+Right-q].green = (63);
-                    image[dimx*p+Right-q].blue = (63);
-                    q++;
-                }
-            }
         
         }   //end second big for
- 
+    }
   ///image processing///
   imageFile.write(reinterpret_cast<char*>(&image), 3*dimx*dimy);
   imageFile.close();
